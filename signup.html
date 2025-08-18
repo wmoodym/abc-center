@@ -1,42 +1,29 @@
-<!doctype html><html lang='en'><head>
-<meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/>
-<title>Sign up — ABC Center</title>
-<script src='https://cdn.tailwindcss.com'></script>
-<link rel='icon' href='assets/favicon.ico'><link rel='manifest' href='site.webmanifest'><meta name='theme-color' content='#1E3A8A'>
-</head><body class='bg-slate-50 text-slate-900'>
-<main class='mx-auto max-w-md px-4 py-12'>
-  <h1 class='text-2xl font-extrabold'>Start free — no credit card</h1>
-  <p class='mt-2 text-sm opacity-80'>Create your account. You can upgrade to Pro anytime.</p>
-  <form id='form' class='mt-5 grid gap-3' onsubmit='return createFreeAccount(event)'>
-    <input id='business' class='px-3 py-2 rounded-xl border' placeholder='Business name' required>
-    <input id='name' class='px-3 py-2 rounded-xl border' placeholder='Your name' required>
-    <input id='email' type='email' class='px-3 py-2 rounded-xl border' placeholder='Email' required>
-    <div class='grid grid-cols-2 gap-3'>
-      <input id='username' class='px-3 py-2 rounded-xl border' placeholder='Username' required>
-      <input id='password' type='password' class='px-3 py-2 rounded-xl border' placeholder='Password' required>
-    </div>
-    <button class='mt-2 px-5 py-3 rounded-2xl' style='background:#FACC15;color:#1E3A8A;font-weight:600'>Create Free Account</button>
-    <p class='text-xs opacity-70'>By signing up you agree to our <a href='terms.html' class='underline'>Terms</a> and <a href='privacy.html' class='underline'>Privacy</a>.</p>
-  </form>
-  <p id='thanks' class='hidden mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-emerald-800'>Thanks! Opening the app…</p>
-</main>
+<!doctype html><meta charset='utf-8'><title>Sign up — ABC Center</title>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
+<h1>Start free — no credit card</h1>
+<form onsubmit="return go(event)">
+  <label>Business <input id="business" required></label>
+  <label>Name <input id="name" required></label>
+  <label>Email <input id="email" type="email" required></label>
+  <label>Username <input id="username" required></label>
+  <label>Password <input id="password" type="password" required></label>
+  <button>Create Free Account</button>
+</form>
+<p id='thanks' style='display:none;color:green'>Thanks! Opening the app…</p>
 <script>
-async function createFreeAccount(e){
+async function go(e){
   e.preventDefault();
   const business=document.getElementById('business').value.trim();
   const name=document.getElementById('name').value.trim();
   const email=document.getElementById('email').value.trim();
   const username=document.getElementById('username').value.trim();
   const password=document.getElementById('password').value.trim();
-  if(!business||!name||!email||!username||!password){alert('Please fill all fields');return false;}
-  let s={};try{s=JSON.parse(localStorage.getItem('abc_state')||'{}')}catch(e){s={}}
-  s.user={username}; s.settings=s.settings||{};
-  s.settings.businessName=business; s.settings.ownerEmail=email; s.settings.plan='free';
-  localStorage.setItem('abc_state',JSON.stringify(s));
-  try{await fetch('api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({business,name,email,username,source:'signup'})});}catch(err){}
-  document.getElementById('thanks').classList.remove('hidden');
-  setTimeout(()=>{location.href='app/app.html';},900);
+  let s={};try{s=JSON.parse(localStorage.getItem('abc_state')||'{}')}catch(e){s={}};
+  s.user={username}; s.settings=s.settings||{}; s.settings.businessName=business; s.settings.ownerEmail=email; s.settings.plan='free';
+  localStorage.setItem('abc_state', JSON.stringify(s));
+  try{await fetch('api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({business,name,email,username,source:'signup'})});}catch{}
+  document.getElementById('thanks').style.display='block';
+  setTimeout(()=>{ location.href='app/app.html'; }, 900);
   return false;
 }
 </script>
-</body></html>
