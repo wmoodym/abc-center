@@ -1,1 +1,0 @@
-Deploy: Add STRIPE_SECRET_KEY & PRICE_PRO env vars. Tour overlay is lighter and auto-dismisses after 6s.
