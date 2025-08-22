@@ -1,6 +1,6 @@
 <!doctype html><html lang='en'><head>
 <meta charset='utf-8'/><meta name='viewport' content='width=device-width,initial-scale=1'/>
-<title>ABC Center — App</title>
+<title>ABC Center — App v2.1.1</title>
 <link rel='manifest' href='/site.webmanifest'><meta name='theme-color' content='#1E3A8A'>
 <script src='https://cdn.tailwindcss.com'></script>
 <script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));}</script>
@@ -34,7 +34,7 @@
 </div>
 <script>
 function logout(){ localStorage.removeItem('abc_state'); location.href='../index.html'; }
-(function(){ let s={}; try{s=JSON.parse(localStorage.getItem('abc_state')||'{}')}catch(e){{}}; document.getElementById('welcome').textContent = 'Welcome, ' + (s.user && s.user.username || 'User') + '. Plan: ' + (s.settings && s.settings.plan || 'free'); })();
+(function(){ let s={}; try{s=JSON.parse(localStorage.getItem('abc_state')||'{}')}catch(e){}; document.getElementById('welcome').textContent = 'Welcome, ' + (s.user && s.user.username || 'User') + '. Plan: ' + (s.settings && s.settings.plan || 'free'); })();
 async function askAI(){ const q=document.getElementById('aiq').value.trim(); if(!q) return; document.getElementById('aiLoading').style.display='inline';
   try{ const r=await fetch('../api/ai',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'system',content:'You are a helpful small-business assistant for CRM, sales, and marketing.'},{role:'user',content:q}]})});
     const data=await r.json(); document.getElementById('aiOut').textContent = (data.text || data.reply || data.error || 'No answer'); }
@@ -42,4 +42,22 @@ async function askAI(){ const q=document.getElementById('aiq').value.trim(); if(
   finally{ document.getElementById('aiLoading').style.display='none'; }
 }
 </script>
+
+<script>
+(async()=>{
+  try{
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) { try{ await r.unregister(); }catch(e){} }
+      const keys = await caches.keys();
+      for (const k of keys) { if (k !== 'abc-center-v2-1-1') { try{ await caches.delete(k);}catch(e){} } }
+    }
+    try{
+      const toRemove = ['abc_tour_done','abc_trial_banner','abc_proTrial','abc_proTrialUntil'];
+      toRemove.forEach(k=>localStorage.removeItem(k));
+    }catch(e){}
+  }catch(e){}
+})();
+</script>
+
 </body></html>
