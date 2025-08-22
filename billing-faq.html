@@ -1,0 +1,28 @@
+
+<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/70 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <div class="flex items-center gap-3"><div class="grid h-9 w-9 place-items-center rounded-xl bg-[#1E3A8A] text-white">ABC</div><b>ABC Center</b></div>
+    <nav class="hidden md:flex gap-3 text-sm">
+      <a href="index.html#features">Features</a><a href="index.html#reviews">Reviews</a><a href="index.html#pricing">Pricing</a><a href="index.html#faq">FAQ</a>
+      <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="billing-faq.html">Billing</a><a href="refund.html">Refunds</a><a href="contact.html">Contact</a>
+    </nav>
+    <div class="flex gap-2">
+      <a href="signup.html" class="px-4 py-2 rounded-xl border">Sign up</a>
+      <a href="app/app.html" class="px-4 py-2 rounded-xl bg-[#1E3A8A] text-white">Log in</a>
+    </div>
+  </div>
+</header>
+<!doctype html><meta charset='utf-8'><title>Billing FAQ</title><link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'><h1>Billing FAQ</h1><ul><li>Upgrade via Pricing → Pro</li><li>Cancel anytime from the Billing Portal</li><li>Invoices are emailed after purchase</li></ul>
+<script>
+(async()=>{
+  try{
+    if ('serviceWorker' in navigator) {
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for (const r of regs) { try{ await r.unregister(); }catch(e){} }
+      const keys = await caches.keys();
+      for (const k of keys) { if (k !== 'abc-center-v2-2') { try{ await caches.delete(k);}catch(e){} } }
+    }
+    try{ ['abc_tour_done','abc_trial_banner','abc_proTrial','abc_proTrialUntil'].forEach(k=>localStorage.removeItem(k)); }catch(e){}
+  }catch(e){}
+})();
+</script>
