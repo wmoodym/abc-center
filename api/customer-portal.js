@@ -1,0 +1,36 @@
+export const config = { runtime: 'edge' };
+export default async function handler(req) {
+  if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+  const secret = process.env.STRIPE_SECRET_KEY;
+  if (!secret) return new Response(JSON.stringify({ error: 'Missing STRIPE_SECRET_KEY' }), { status: 500, headers: { 'content-type': 'application/json' } });
+  let body={}; try{ body = await req.json(); }catch{}
+  const email = (body.email||'').trim();
+  if (!email) return new Response(JSON.stringify({ error:'Email required' }), { status: 400, headers:{'content-type':'application/json'}});
+
+  // Find Stripe customer by email (latest first)
+  const list = await fetch('https://api.stripe.com/v1/customers?email='+encodeURIComponent(email)+'&limit=1', {
+    headers: { 'Authorization': `Bearer ${secret}` }
+  });
+  const customers = await list.json();
+  if (!customers || !customers.data || !customers.data[0]) {
+    return new Response(JSON.stringify({ error: 'No customer found for this email.' }), { status: 404, headers: { 'content-type': 'application/json' } });
+  }
+  const customerId = customers.data[0].id;
+
+  // Create billing portal session
+  const origin = process.env.DOMAIN || (new URL(req.url)).origin;
+  const params = new URLSearchParams();
+  params.set('customer', customerId);
+  params.set('return_url', origin);
+
+  const sess = await fetch('https://api.stripe.com/v1/billing_portal/sessions', {
+    method: 'POST',
+    headers: { 'Authorization': `Bearer ${secret}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: params
+  });
+  const data = await sess.json();
+  if (data && data.url) {
+    return new Response(JSON.stringify({ url: data.url }), { status: 200, headers: { 'content-type': 'application/json' } });
+  }
+  return new Response(JSON.stringify({ error: 'Unable to create portal session' }), { status: 500, headers: { 'content-type': 'application/json' } });
+}

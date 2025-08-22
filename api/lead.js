@@ -1,0 +1,16 @@
+export const config = { runtime: 'edge' };
+export default async function handler(req) {
+  if (req.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+  let payload = {}; try { payload = await req.json(); } catch {}
+  payload.ts = payload.ts || new Date().toISOString();
+  const hook = process.env.LEADS_WEBHOOK || '';
+  if (hook) {
+    try {
+      const r = await fetch(hook, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload) });
+      return new Response(JSON.stringify({ ok: true, forwarded: r.status }), { status: 200, headers: { 'content-type': 'application/json' } });
+    } catch (e) {
+      return new Response(JSON.stringify({ ok: false, error: 'forward_failed' }), { status: 500, headers: { 'content-type': 'application/json' } });
+    }
+  }
+  return new Response(JSON.stringify({ ok: true, forwarded: false }), { status: 200, headers: { 'content-type': 'application/json' } });
+}
