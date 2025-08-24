@@ -1,9 +1,0 @@
-<!doctype html><meta charset='utf-8'><title>Manage Billing</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>
-<h1>Manage Billing</h1>
-<form onsubmit="openPortal(event)"><label>Email <input id="email" type="email" required></label><button>Open Portal</button></form>
-<script>
-async function openPortal(e){e.preventDefault();const email=document.getElementById('email').value.trim();
-const r=await fetch('/api/customer-portal',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
-const data=await r.json(); if(data.url) location.href=data.url; else alert(data.error||'No portal available.');}
-</script>
