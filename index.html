@@ -1,0 +1,98 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ABC Center — v2.2.1 (Clean URLs)</title>
+<link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#1E3A8A">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('/sw.js'));}</script>
+</head><body class="bg-slate-50 text-slate-900">
+<header class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/70 backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+    <div class="flex items-center gap-3"><div class="grid h-9 w-9 place-items-center rounded-xl bg-[#1E3A8A] text-white">ABC</div><b>ABC Center</b></div>
+    <nav class="hidden md:flex gap-3 text-sm">
+      <a href="/#features">Features</a><a href="/#reviews">Reviews</a><a href="/#pricing">Pricing</a><a href="/#faq">FAQ</a>
+      <a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/billing-faq">Billing</a><a href="/refund">Refunds</a><a href="/contact">Contact</a>
+    </nav>
+    <div class="flex gap-2">
+      <a href="/signup" class="px-4 py-2 rounded-xl border">Sign up</a>
+      <a href="/app" class="px-4 py-2 rounded-xl bg-[#1E3A8A] text-white">Log in</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero text-white" style="background:linear-gradient(135deg,#1E3A8A 0%, #0B1F4F 60%, #0B1226 100%)">
+  <div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-extrabold">Replace 5+ apps. Run everything in one place.</h1>
+      <p class="mt-3 opacity-90">CRM, sales, invoices, marketing, automations, and reports — online or offline.</p>
+      <div class="mt-6 flex flex-col sm:flex-row items-center gap-3">
+        <a href="/signup" class="rounded-2xl px-6 py-3 font-semibold" style="background:#FACC15;color:#1E3A8A">Get Started Free</a>
+        <a href="/app" class="rounded-2xl px-6 py-3 border border-white/40">Try Demo</a>
+      </div>
+      <form id="leadForm" onsubmit="submitLead(event)" class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <input id="leadName" placeholder="Your name (optional)" class="px-3 py-2 rounded-xl bg-white text-slate-900"/>
+        <input id="leadEmail" type="email" placeholder="Your email" required class="px-3 py-2 rounded-xl bg-white text-slate-900 sm:col-span-2"/>
+        <button class="px-4 py-2 rounded-xl bg-white text-slate-900 font-semibold">Notify me</button>
+      </form>
+    </div>
+    <div class="rounded-3xl bg-white/10 border border-white/20 p-6">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 text-slate-900">
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Dashboard</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Customers</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Sales</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Invoices</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Reports</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Campaigns</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Automations</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">Exports</div>
+        <div class="rounded-xl bg-white/95 p-4 text-center text-sm">PWA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="mx-auto max-w-6xl px-4 py-14">
+  <h2 class="text-3xl font-extrabold">What you get</h2>
+  <div class="mt-6 grid gap-4 md:grid-cols-3">
+    <div class="rounded-2xl border bg-white p-5 shadow"><h3 class="font-semibold">Sales & Invoices</h3><p class="mt-2 text-sm opacity-80">Create sales, email invoices, mark paid—fast.</p></div>
+    <div class="rounded-2xl border bg-white p-5 shadow"><h3 class="font-semibold">CRM</h3><p class="mt-2 text-sm opacity-80">Customers, segments, and history in one place.</p></div>
+    <div class="rounded-2xl border bg-white p-5 shadow"><h3 class="font-semibold">Marketing</h3><p class="mt-2 text-sm opacity-80">Email/SMS campaigns + automations that follow up for you.</p></div>
+  </div>
+</section>
+
+<section id="reviews" class="mx-auto max-w-6xl px-4 py-14">
+  <h2 class="text-3xl font-extrabold">Loved by small businesses</h2>
+  <div class="mt-6 grid md:grid-cols-3 gap-4">
+    <blockquote class="rounded-2xl border bg-white p-5 shadow"><p>“Switched from 4 tools to ABC Center. Sends invoices in minutes.”</p><footer class="mt-2 text-sm opacity-70">— Taylor, Landscaping</footer></blockquote>
+    <blockquote class="rounded-2xl border bg-white p-5 shadow"><p>“Automations follow up with clients for me. More repeat sales.”</p><footer class="mt-2 text-sm opacity-70">— Jordan, Home Services</footer></blockquote>
+    <blockquote class="rounded-2xl border bg-white p-5 shadow"><p>“Finally one screen where the whole team can work.”</p><footer class="mt-2 text-sm opacity-70">— Casey, Retail</footer></blockquote>
+  </div>
+</section>
+
+<section id="pricing" class="bg-white border-y border-slate-200">
+  <div class="mx-auto max-w-6xl px-4 py-14">
+    <h2 class="text-3xl font-extrabold">Simple pricing</h2>
+    <div class="grid md:grid-cols-3 gap-6 mt-6">
+      <div class="p-6 rounded-2xl border bg-white"><h3 class="font-semibold">Free</h3><p class="text-3xl font-extrabold mt-2">$0</p><a href="/signup" class="mt-4 inline-block px-4 py-2 rounded-xl text-white" style="background:#1E3A8A">Start Free</a></div>
+      <div class="p-6 rounded-2xl border-2 bg-white" style="border-color:#1E3A8A"><h3 class="font-semibold">Pro</h3><p class="text-3xl font-extrabold mt-2">$19</p><a href="#" onclick="startCheckout();return false;" class="mt-4 inline-block px-4 py-2 rounded-xl font-semibold" style="background:#FACC15;color:#1E3A8A">Upgrade</a><p class="text-xs opacity-70 mt-2">Requires Stripe keys on Vercel.</p></div>
+      <div class="p-6 rounded-2xl border bg-white"><h3 class="font-semibold">Enterprise</h3><p class="text-3xl font-extrabold mt-2">$99</p><a href="mailto:sales@abccenter.app?subject=Enterprise%20Inquiry" class="mt-4 inline-block px-4 py-2 rounded-xl border">Talk to Sales</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="mx-auto max-w-6xl px-4 py-14">
+  <h2 class="text-3xl font-extrabold mb-4">FAQ</h2>
+  <details class="rounded-xl border p-4 bg-white shadow"><summary class="font-semibold">Do I need tech skills?</summary><p class="mt-2 text-sm opacity-80">No. If you can use a phone, you can use ABC Center.</p></details>
+  <details class="rounded-xl border p-4 bg-white shadow mt-2"><summary class="font-semibold">Will it work offline?</summary><p class="mt-2 text-sm opacity-80">Yes. Install the PWA and keep working offline.</p></details>
+  <details class="rounded-xl border p-4 bg-white shadow mt-2"><summary class="font-semibold">How do I manage billing?</summary><p class="mt-2 text-sm opacity-80">After purchase, open <a class="underline" href="/billing">Billing</a> and enter your email to access the customer portal.</p></details>
+</section>
+
+<footer class="border-t py-10 text-center text-sm opacity-70">
+  © <span id="y"></span> ABC Center · <a class="underline" href="/privacy">Privacy</a> · <a class="underline" href="/terms">Terms</a> · <a class="underline" href="/billing-faq">Billing</a> · <a class="underline" href="/refund">Refunds</a> · <a class="underline" href="/contact">Contact</a>
+</footer>
+
+<script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+<script>
+async function submitLead(e){e.preventDefault();const email=document.getElementById('leadEmail').value.trim();const name=(document.getElementById('leadName')&&document.getElementById('leadName').value.trim())||'';if(!email){alert('Please enter your email');return;}await fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name,source:'landing'})});document.getElementById('leadForm').reset();alert('Thanks! We will be in touch.');}
+async function startCheckout(){const email=(document.getElementById('leadEmail')&&document.getElementById('leadEmail').value.trim())||'';const r=await fetch('/api/create-checkout-session',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({customer_email:email})});const data=await r.json();if(data&&data.url)location.href=data.url;else alert(data.error||'Checkout unavailable');}
+</script>
+</body></html>
